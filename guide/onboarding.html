@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Guide Setup — TravelSphere</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Poppins',sans-serif;background:#f8fafc;min-height:100vh;padding:40px 20px}
+    :root{--amber:#f59e0b;--amber-d:#d97706;--teal:#0f766e;--teal-l:#14b8a6;--navy:#0f172a;--gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;--gray-600:#475569}
+    .container{max-width:720px;margin:0 auto}
+    .logo{display:flex;align-items:center;gap:10px;margin-bottom:32px;justify-content:center}
+    .logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--amber),var(--teal));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px}
+    .logo-text{font-size:1.2rem;font-weight:800;color:var(--navy)}.logo-text span{color:var(--amber)}
+    /* Steps */
+    .steps{display:flex;align-items:center;justify-content:center;margin-bottom:40px}
+    .step{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;max-width:90px}
+    .step-circle{width:32px;height:32px;border-radius:50%;border:2px solid var(--gray-200);background:#fff;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:var(--gray-600);transition:all .3s;position:relative;z-index:1}
+    .step.active .step-circle{background:var(--amber);border-color:var(--amber);color:var(--navy)}
+    .step.done .step-circle{background:var(--teal);border-color:var(--teal);color:#fff}
+    .step-label{font-size:.65rem;font-weight:600;color:var(--gray-600);text-align:center}
+    .step.active .step-label{color:var(--amber)}
+    .step-line{flex:1;height:2px;background:var(--gray-200);margin-top:-19px;z-index:0}
+    .step-line.done{background:var(--teal)}
+    /* Card */
+    .card{background:#fff;border-radius:20px;padding:36px;border:1px solid var(--gray-200);box-shadow:0 4px 20px rgba(0,0,0,.06)}
+    .card-title{font-size:1.25rem;font-weight:800;margin-bottom:4px;color:var(--navy)}
+    .card-sub{font-size:.87rem;color:var(--gray-600);margin-bottom:24px}
+    label{display:block;font-size:.8rem;font-weight:600;color:var(--gray-600);margin-bottom:5px}
+    input,select,textarea{width:100%;padding:11px 14px;border:1px solid var(--gray-200);border-radius:10px;font-size:.88rem;font-family:'Poppins',sans-serif;outline:none;color:var(--navy);transition:border-color .2s;background:#fff}
+    input:focus,select:focus,textarea:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(245,158,11,.1)}
+    .form-group{margin-bottom:16px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .form-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+    .chip-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+    .chip{padding:6px 14px;border-radius:20px;border:2px solid var(--gray-200);background:#fff;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Poppins',sans-serif;color:var(--gray-600)}
+    .chip.selected{border-color:var(--amber);background:rgba(245,158,11,.08);color:var(--amber-d)}
+    .btn-row{display:flex;gap:12px;margin-top:24px}
+    .btn{flex:1;padding:12px;border-radius:12px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif;transition:all .2s;border:none}
+    .btn-primary{background:linear-gradient(135deg,var(--amber),var(--amber-d));color:var(--navy)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,158,11,.4)}
+    .btn-secondary{background:var(--gray-100);color:var(--gray-600)}
+    .btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+    .err{background:#fef2f2;border:1px solid #fecaca;color:#dc2626;padding:12px 16px;border-radius:10px;font-size:.85rem;margin-bottom:18px;display:none}
+    .step-panel{display:none}.step-panel.active{display:block}
+    /* Rate calculator */
+    .rate-info{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:12px;padding:16px;margin-top:12px;font-size:.82rem;color:var(--gray-600)}
+    .rate-info strong{color:var(--navy)}
+    .level-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:.75rem;font-weight:700;margin-left:8px}
+    .l-starter{background:#f1f5f9;color:#475569}.l-standard{background:#dbeafe;color:#1e40af}
+    .l-professional{background:#ede9fe;color:#5b21b6}.l-premium{background:#fef3c7;color:#92400e}
+    /* Complete */
+    .complete-wrap{text-align:center;padding:20px 0}
+    .complete-icon{font-size:4rem;margin-bottom:16px}
+    .token-box{background:var(--gray-50);border:2px solid var(--amber);border-radius:12px;padding:16px 24px;margin:20px 0;font-family:monospace;font-size:1.1rem;font-weight:700;color:var(--amber-d);letter-spacing:2px}
+    .pending-notice{background:#fef3c7;border:1px solid #fde68a;border-radius:12px;padding:16px;font-size:.85rem;color:#92400e;margin:16px 0}
+    @media(max-width:540px){.form-row,.form-row3{grid-template-columns:1fr}.step-label{display:none}}
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="logo"><div class="logo-icon">🧭</div><span class="logo-text">Travel<span>Sphere</span></span></div>
+
+  <!-- Step indicator -->
+  <div class="steps" id="stepIndicator">
+    <div class="step active" id="si-1"><div class="step-circle">1</div><div class="step-label">Personal</div></div>
+    <div class="step-line" id="sl-1"></div>
+    <div class="step" id="si-2"><div class="step-circle">2</div><div class="step-label">Location</div></div>
+    <div class="step-line" id="sl-2"></div>
+    <div class="step" id="si-3"><div class="step-circle">3</div><div class="step-label">Skills</div></div>
+    <div class="step-line" id="sl-3"></div>
+    <div class="step" id="si-4"><div class="step-circle">4</div><div class="step-label">Verify</div></div>
+    <div class="step-line" id="sl-4"></div>
+    <div class="step" id="si-5"><div class="step-circle">5</div><div class="step-label">Rates</div></div>
+    <div class="step-line" id="sl-5"></div>
+    <div class="step" id="si-6"><div class="step-circle"><i class="fas fa-check" style="font-size:.65rem"></i></div><div class="step-label">Done</div></div>
+  </div>
+
+  <div class="err" id="err"></div>
+
+  <!-- Step 1 — Personal -->
+  <div class="card step-panel active" id="panel-1">
+    <div class="card-title">Personal Information</div>
+    <div class="card-sub">Your basic details as a guide</div>
+    <div class="form-row">
+      <div class="form-group"><label>Full Name *</label><input type="text" id="s1_name" placeholder="Rajesh Kumar" required/></div>
+      <div class="form-group"><label>Mobile Number *</label><input type="tel" id="s1_mobile" placeholder="+91 98765 43210" required/></div>
+    </div>
+    <div class="btn-row"><button class="btn btn-primary" onclick="saveStep(1)">Continue <i class="fas fa-arrow-right"></i></button></div>
+  </div>
+
+  <!-- Step 2 — Location -->
+  <div class="card step-panel" id="panel-2">
+    <div class="card-title">Your Location</div>
+    <div class="card-sub">Where do you primarily operate as a guide?</div>
+    <div class="form-row">
+      <div class="form-group"><label>City *</label><input type="text" id="s2_city" placeholder="Jaipur"/></div>
+      <div class="form-group"><label>State *</label><input type="text" id="s2_state" placeholder="Rajasthan"/></div>
+    </div>
+    <div class="form-group"><label>Location Code</label><input type="text" id="s2_code" placeholder="JAI" maxlength="5" style="text-transform:uppercase"/></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goToStep(1)"><i class="fas fa-arrow-left"></i></button>
+      <button class="btn btn-primary" onclick="saveStep(2)">Continue <i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <!-- Step 3 — Professional -->
+  <div class="card step-panel" id="panel-3">
+    <div class="card-title">Your Skills & Experience</div>
+    <div class="card-sub">Tell travellers what makes you the perfect guide</div>
+    <div class="form-group"><label>Languages You Speak *</label>
+      <div class="chip-group" id="langChips">
+        <button class="chip" onclick="toggleChip(this)">Hindi</button>
+        <button class="chip" onclick="toggleChip(this)">English</button>
+        <button class="chip" onclick="toggleChip(this)">Tamil</button>
+        <button class="chip" onclick="toggleChip(this)">Telugu</button>
+        <button class="chip" onclick="toggleChip(this)">Malayalam</button>
+        <button class="chip" onclick="toggleChip(this)">Kannada</button>
+        <button class="chip" onclick="toggleChip(this)">Bengali</button>
+        <button class="chip" onclick="toggleChip(this)">Marathi</button>
+        <button class="chip" onclick="toggleChip(this)">Punjabi</button>
+        <button class="chip" onclick="toggleChip(this)">French</button>
+        <button class="chip" onclick="toggleChip(this)">German</button>
+        <button class="chip" onclick="toggleChip(this)">Japanese</button>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Years of Experience *</label><input type="number" id="s3_exp" placeholder="5" min="0" max="50"/></div>
+    </div>
+    <div class="form-group"><label>Bio / About You</label><textarea id="s3_bio" rows="3" placeholder="Describe your expertise, passion for travel, and what makes your tours special…"></textarea></div>
+    <div class="form-group"><label>Specializations</label>
+      <div class="chip-group" id="specChips">
+        <button class="chip" onclick="toggleChip(this)">Heritage & History</button>
+        <button class="chip" onclick="toggleChip(this)">Adventure & Trekking</button>
+        <button class="chip" onclick="toggleChip(this)">Food Tours</button>
+        <button class="chip" onclick="toggleChip(this)">Wildlife & Nature</button>
+        <button class="chip" onclick="toggleChip(this)">Photography</button>
+        <button class="chip" onclick="toggleChip(this)">Spiritual & Temples</button>
+        <button class="chip" onclick="toggleChip(this)">Village & Rural</button>
+        <button class="chip" onclick="toggleChip(this)">Backwater & Boats</button>
+        <button class="chip" onclick="toggleChip(this)">Desert & Forts</button>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goToStep(2)"><i class="fas fa-arrow-left"></i></button>
+      <button class="btn btn-primary" onclick="saveStep(3)">Continue <i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <!-- Step 4 — Verification -->
+  <div class="card step-panel" id="panel-4">
+    <div class="card-title">Government ID Verification</div>
+    <div class="card-sub">Required for guide verification. Your ID will only be seen by TravelSphere admins.</div>
+    <div class="form-row">
+      <div class="form-group"><label>ID Type *</label>
+        <select id="s4_type">
+          <option value="">Select ID Type</option>
+          <option>Aadhaar Card</option>
+          <option>Passport</option>
+          <option>Driving Licence</option>
+          <option>Voter ID</option>
+          <option>PAN Card</option>
+        </select>
+      </div>
+      <div class="form-group"><label>ID Number *</label><input type="text" id="s4_number" placeholder="XXXX XXXX XXXX"/></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goToStep(3)"><i class="fas fa-arrow-left"></i></button>
+      <button class="btn btn-primary" onclick="saveStep(4)">Continue <i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <!-- Step 5 — Rates -->
+  <div class="card step-panel" id="panel-5">
+    <div class="card-title">Your Daily Rate</div>
+    <div class="card-sub">Set your rate per day. You can update this anytime.</div>
+    <div class="form-group"><label>Daily Rate (₹ per day) *</label>
+      <input type="number" id="s5_rate" placeholder="1500" min="0" oninput="updateRateInfo()"/>
+    </div>
+    <div class="rate-info" id="rateInfo">
+      Enter your rate to see your guide level.
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goToStep(4)"><i class="fas fa-arrow-left"></i></button>
+      <button class="btn btn-primary" onclick="saveStep(5)">Continue <i class="fas fa-arrow-right"></i></button>
+    </div>
+  </div>
+
+  <!-- Step 6 — Done -->
+  <div class="card step-panel" id="panel-6">
+    <div class="complete-wrap">
+      <div class="complete-icon">🎯</div>
+      <div class="card-title">Profile Submitted!</div>
+      <div class="card-sub">Your guide profile is under review.</div>
+      <div class="token-box" id="myToken">—</div>
+      <div class="pending-notice">
+        <strong>⏳ Pending Admin Verification</strong><br>
+        Our team will review your profile and ID within 24–48 hours. You'll be notified once approved.
+      </div>
+      <button class="btn btn-primary" style="max-width:280px;margin:16px auto 0" onclick="window.location.href='/guide/dashboard.html'">
+        <i class="fas fa-home"></i> Go to Dashboard
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const token = localStorage.getItem('ts_token');
+if (!token) window.location.href = '/guide/login.html';
+
+let currentStep = 1;
+
+function api(url, opts={}) {
+  return fetch(url, { headers:{ Authorization:`Bearer ${token}`, 'Content-Type':'application/json' }, ...opts }).then(r=>r.json());
+}
+function showErr(msg) { const e=document.getElementById('err'); e.textContent=msg; e.style.display='block'; setTimeout(()=>e.style.display='none',4000); }
+function toggleChip(el) { el.classList.toggle('selected'); }
+function getSelectedChips(id) { return [...document.querySelectorAll(`#${id} .chip.selected`)].map(c=>c.textContent.trim()); }
+
+function updateRateInfo() {
+  const rate = parseInt(document.getElementById('s5_rate').value)||0;
+  let level='Starter', cls='l-starter';
+  if (rate>=3500){ level='Premium'; cls='l-premium'; }
+  else if (rate>=2000){ level='Professional'; cls='l-professional'; }
+  else if (rate>=1000){ level='Standard'; cls='l-standard'; }
+  document.getElementById('rateInfo').innerHTML =
+    `Your Guide Level: <strong class="level-badge ${cls}">${level}</strong><br>
+     <small style="margin-top:6px;display:block">Starter: &lt;₹1,000 · Standard: ₹1,000–₹1,999 · Professional: ₹2,000–₹3,499 · Premium: ₹3,500+</small>`;
+}
+
+function goToStep(n) {
+  document.getElementById('panel-'+currentStep).classList.remove('active');
+  document.getElementById('panel-'+n).classList.add('active');
+  for (let i=1;i<=6;i++) {
+    const si=document.getElementById('si-'+i);
+    const sl=document.getElementById('sl-'+i);
+    if (i<n)       { si.classList.remove('active'); si.classList.add('done'); if(sl) sl.classList.add('done'); }
+    else if(i===n) { si.classList.add('active');    si.classList.remove('done'); }
+    else           { si.classList.remove('active','done'); if(sl) sl.classList.remove('done'); }
+  }
+  currentStep=n;
+}
+
+async function saveStep(step) {
+  let payload={};
+  if (step===1) {
+    const name=document.getElementById('s1_name').value.trim();
+    const mobile=document.getElementById('s1_mobile').value.trim();
+    if (!name||!mobile) return showErr('Name and mobile are required');
+    payload={full_name:name, mobile};
+  }
+  if (step===2) {
+    const city=document.getElementById('s2_city').value.trim();
+    const state=document.getElementById('s2_state').value.trim();
+    if (!city||!state) return showErr('City and state are required');
+    payload={city, state, location_code:document.getElementById('s2_code').value.trim().toUpperCase()||'IND'};
+  }
+  if (step===3) {
+    const langs=getSelectedChips('langChips');
+    const exp=parseInt(document.getElementById('s3_exp').value)||0;
+    if (!langs.length) return showErr('Select at least one language');
+    payload={languages:langs, experience_years:exp, bio:document.getElementById('s3_bio').value.trim(), specializations:getSelectedChips('specChips')};
+  }
+  if (step===4) {
+    const type=document.getElementById('s4_type').value;
+    const num=document.getElementById('s4_number').value.trim();
+    if (!type||!num) return showErr('ID type and number are required');
+    payload={govt_id_type:type, govt_id_number:num};
+  }
+  if (step===5) {
+    const rate=parseInt(document.getElementById('s5_rate').value)||0;
+    if (rate<=0) return showErr('Please enter a valid daily rate');
+    payload={daily_rate:rate};
+  }
+
+  try {
+    const data=await api(`/api/guide/onboarding/step/${step}`,{method:'PUT',body:JSON.stringify(payload)});
+    if (data.error) return showErr(data.error);
+    if (step===5) {
+      const res=await api('/api/guide/onboarding/step/6',{method:'PUT',body:'{}'});
+      document.getElementById('myToken').textContent=localStorage.getItem('ts_portal_token')||'—';
+      goToStep(6);
+    } else {
+      goToStep(step+1);
+    }
+  } catch(ex){ showErr(ex.message); }
+}
+
+// Pre-fill from profile
+api('/api/guide/profile').then(p=>{
+  if (p.full_name) document.getElementById('s1_name').value=p.full_name;
+  if (p.mobile)    document.getElementById('s1_mobile').value=p.mobile;
+  if (p.city)      document.getElementById('s2_city').value=p.city;
+  if (p.state)     document.getElementById('s2_state').value=p.state;
+  if (p.onboarding_step>1) goToStep(p.onboarding_step);
+}).catch(()=>{});
+</script>
+</body>
+</html>

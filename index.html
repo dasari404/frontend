@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TravelSphere — Travel Smart. Travel Safe. Travel Local.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-icon">🌍</div>
+    <span class="nav-logo-text">Travel<span>Sphere</span></span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#map-section">Explore Map</a></li>
+    <li><a href="#guides">Guides</a></li>
+    <li><a href="#experiences">Experiences</a></li>
+    <li><a href="#scam">Scam Shield</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><button class="nav-cta" onclick="openBookingModal('TravelSphere')">Get Started Free</button></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-particles" id="heroParticles"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span>🚀</span><span>India's Smart Tourism Platform</span></div>
+    <h1 class="hero-title">Explore India<br /><span class="gradient-text">Smarter &amp; Safer</span><br />Than Ever Before</h1>
+    <p class="hero-tagline">Travel Smart. Travel Safe. Travel Local.<br />Crowd prediction · Scam detection · Verified guides · Hidden gems</p>
+    <div class="hero-buttons">
+      <a href="#features" class="btn-primary"><i class="fas fa-compass"></i> Start Exploring</a>
+      <a href="#map-section" class="btn-secondary"><i class="fas fa-map-marked-alt"></i> View Live Map</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">17+</div><div class="hero-stat-label">Destinations Tracked</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">98%</div><div class="hero-stat-label">Scam Detection Rate</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">500+</div><div class="hero-stat-label">Verified Local Guides</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">4.9★</div><div class="hero-stat-label">Avg Guide Rating</div></div>
+    </div>
+  </div>
+  <div class="scroll-indicator"><span>Scroll to explore</span><div class="scroll-arrow"></div></div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="gray-bg">
+  <div class="section-inner">
+    <div class="fade-in-up">
+      <span class="section-tag"><i class="fas fa-star"></i> Core Features</span>
+      <h2 class="section-title">Everything You Need<br />for a Perfect Journey</h2>
+      <p class="section-sub">Powerful features that protect, guide, and enrich every step of your travel experience across India.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fade-in-up"><div class="feature-icon fi-red">🛡️</div><div class="feature-title">Tourist Scam Shield</div><div class="feature-desc">Real-time scam alerts, verified fare data, and fake guide detection that flags threats before you're affected.</div></div>
+      <div class="feature-card fade-in-up"><div class="feature-icon fi-teal">📍</div><div class="feature-title">Crowd &amp; Safety Predictor</div><div class="feature-desc">Live crowd levels, safety scores out of 10, weather alerts, best visiting times, and traffic info — updated every hour.</div></div>
+      <div class="feature-card fade-in-up"><div class="feature-icon fi-green">🌿</div><div class="feature-title">Rural Hidden Gems</div><div class="feature-desc">Discover villages, eco-tourism, handicraft villages, local farms, heritage sites, and cultural festivals most tourists never find.</div></div>
+      <div class="feature-card fade-in-up"><div class="feature-icon fi-blue">♿</div><div class="feature-title">Smart Accessibility</div><div class="feature-desc">Wheelchair-friendly routes, accessible hotels, nearby medical facilities, restroom availability, and elevator/ramp info for every traveller.</div></div>
+      <div class="feature-card fade-in-up"><div class="feature-icon fi-amber">👨‍🏫</div><div class="feature-title">Verified Guide Marketplace</div><div class="feature-desc">Browse ID-verified local guides with ratings, languages, packages. Book, chat, pay securely, and rate your experience.</div></div>
+      <div class="feature-card fade-in-up"><div class="feature-icon fi-purple">🛍️</div><div class="feature-title">Local Experience Marketplace</div><div class="feature-desc">Book food tours, photography walks, trekking, village stays, boat rides, cultural workshops, and craft-making sessions directly from hosts.</div></div>
+      <div class="feature-card fade-in-up"><div class="feature-icon fi-teal">🧭</div><div class="feature-title">Smart Travel Assistant</div><div class="feature-desc">Instant translation, personalised itinerary, nearby recommendations, local etiquette tips, budget planner, and offline maps.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP SECTION -->
+<section id="map-section">
+  <div class="section-inner">
+    <div class="fade-in-up">
+      <span class="section-tag"><i class="fas fa-map-marked-alt"></i> Live Tourist Map</span>
+      <h2 class="section-title">Explore India in Real Time</h2>
+      <p class="section-sub">17 destinations with live crowd levels, safety scores, and open/closed status — updated every hour.</p>
+    </div>
+    <div class="map-controls fade-in-up" style="margin-top:40px;">
+      <button class="map-filter-btn mf-all active" onclick="filterMap('all',this)"><i class="fas fa-globe"></i> All Places</button>
+      <button class="map-filter-btn mf-open" onclick="filterMap('open',this)"><i class="fas fa-circle"></i> Open &amp; Safe</button>
+      <button class="map-filter-btn mf-busy" onclick="filterMap('busy',this)"><i class="fas fa-circle"></i> High Crowd</button>
+      <button class="map-filter-btn mf-closed" onclick="filterMap('closed',this)"><i class="fas fa-circle"></i> Closed</button>
+      <button class="map-filter-btn mf-gem" onclick="filterMap('gem',this)"><i class="fas fa-gem"></i> Hidden Gems</button>
+    </div>
+    <div id="map" class="fade-in-up"></div>
+    <div class="map-legend fade-in-up">
+      <div class="legend-item"><div class="legend-dot" style="background:#22c55e;"></div> Open, Low Crowd</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#eab308;"></div> Open, High Crowd</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ef4444;"></div> Closed / Overcrowded</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#a855f7;"></div> Hidden Gem</div>
+    </div>
+  </div>
+</section>
+
+<!-- SCAM SHIELD -->
+<section id="scam" class="dark-bg">
+  <div class="section-inner">
+    <div class="fade-in-up" style="text-align:center;">
+      <span class="section-tag"><i class="fas fa-shield-alt"></i> Scam Shield</span>
+      <h2 class="section-title">Real-Time Scam Alerts</h2>
+      <p class="section-sub" style="margin:0 auto;">We monitor 500+ tourist hotspots and flag scams, fake guides, and price gouging before you arrive.</p>
+    </div>
+    <div class="scam-grid">
+      <div class="fade-in-up">
+        <h3 style="color:white;margin-bottom:20px;font-size:1.05rem;font-weight:700;display:flex;align-items:center;gap:8px;"><span style="color:#ef4444;">🔴</span> Live Scam Alerts Feed</h3>
+        <!-- Populated by JS via API -->
+        <div class="scam-alerts" id="scamAlertsList"></div>
+      </div>
+      <div class="fade-in-up">
+        <h3 style="color:white;margin-bottom:24px;font-size:1.05rem;font-weight:700;">How Scam Shield Works</h3>
+        <div class="scam-features">
+          <div class="scam-feature"><div class="scam-feature-icon"><i class="fas fa-search"></i></div><div><div class="scam-feature-title">Pattern Recognition</div><div class="scam-feature-desc">Detects scam patterns from thousands of tourist reports and flags suspicious operators automatically.</div></div></div>
+          <div class="scam-feature"><div class="scam-feature-icon"><i class="fas fa-database"></i></div><div><div class="scam-feature-title">Verified Fare Database</div><div class="scam-feature-desc">Crowdsourced + government data gives you real fare benchmarks for taxis, autos, and tour packages.</div></div></div>
+          <div class="scam-feature"><div class="scam-feature-icon"><i class="fas fa-id-badge"></i></div><div><div class="scam-feature-title">Guide Verification System</div><div class="scam-feature-desc">Every guide is background-checked, ID-verified, and review-moderated before joining the platform.</div></div></div>
+          <div class="scam-feature"><div class="scam-feature-icon"><i class="fas fa-bell"></i></div><div><div class="scam-feature-title">Push Alert System</div><div class="scam-feature-desc">Real-time push notifications about active scams near your location — even offline.</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDES -->
+<section id="guides" class="gray-bg">
+  <div class="section-inner">
+    <div class="fade-in-up" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;">
+      <div>
+        <span class="section-tag"><i class="fas fa-users"></i> Guide Marketplace</span>
+        <h2 class="section-title">Meet Your Verified<br />Local Guides</h2>
+        <p class="section-sub">Every guide is background-verified, licensed, and reviewed by real travellers.</p>
+      </div>
+    </div>
+    <!-- Populated by JS via API -->
+    <div class="guides-grid" id="guidesGrid"></div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section id="experiences">
+  <div class="section-inner">
+    <div class="fade-in-up">
+      <span class="section-tag"><i class="fas fa-ticket-alt"></i> Local Experiences</span>
+      <h2 class="section-title">Authentic Experiences,<br />Booked Directly Local</h2>
+      <p class="section-sub">Skip the tourist traps. Book genuine experiences from local hosts — food, culture, nature, and adventure.</p>
+    </div>
+    <!-- Populated by JS via API -->
+    <div class="experiences-grid" id="experiencesGrid"></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="gray-bg">
+  <div class="section-inner">
+    <div class="fade-in-up" style="text-align:center;">
+      <span class="section-tag"><i class="fas fa-tag"></i> Pricing Plans</span>
+      <h2 class="section-title">Simple, Transparent Pricing</h2>
+      <p class="section-sub" style="margin:0 auto;">Choose the plan that fits your travel style. Upgrade anytime.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card pc-free fade-in-up">
+        <div class="pricing-plan-label">Starter</div>
+        <div class="pricing-name">Free</div>
+        <div class="pricing-price"><span class="pricing-amount">₹0</span><span class="pricing-period"> forever</span></div>
+        <div class="pricing-desc">Everything a solo traveller needs to get started safely.</div>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check"></i> Basic tourist maps</li>
+          <li><i class="fas fa-check"></i> Live crowd indicators</li>
+          <li><i class="fas fa-check"></i> Community scam alerts</li>
+          <li class="dim"><i class="fas fa-times"></i> Smart Travel Assistant</li>
+          <li class="dim"><i class="fas fa-times"></i> Offline maps</li>
+          <li class="dim"><i class="fas fa-times"></i> Guide booking</li>
+        </ul>
+        <button class="btn-plan bp-free" onclick="openBookingModal('Free Plan')">Get Started Free</button>
+      </div>
+      <div class="pricing-card pc-premium popular fade-in-up">
+        <div class="popular-badge">⭐ Most Popular</div>
+        <div class="pricing-plan-label">Explorer</div>
+        <div class="pricing-name" style="color:var(--teal);">Premium</div>
+        <div class="pricing-price"><span class="pricing-amount" style="color:var(--teal);">₹299</span><span class="pricing-period"> / month</span></div>
+        <div class="pricing-desc">The complete smart travel toolkit for frequent Indian travellers.</div>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check"></i> Everything in Free</li>
+          <li><i class="fas fa-check"></i> Offline maps (500MB)</li>
+          <li><i class="fas fa-check"></i> Smart Travel Assistant</li>
+          <li><i class="fas fa-check"></i> Full Scam Shield</li>
+          <li><i class="fas fa-check"></i> Guide booking &amp; chat</li>
+          <li><i class="fas fa-check"></i> Experience marketplace</li>
+        </ul>
+        <button class="btn-plan bp-premium" onclick="openBookingModal('Premium Plan')">Start 7-Day Free Trial</button>
+      </div>
+      <div class="pricing-card pc-biz fade-in-up">
+        <div class="pricing-plan-label">Pro</div>
+        <div class="pricing-name" style="color:var(--amber-dark);">Business</div>
+        <div class="pricing-price"><span class="pricing-amount" style="color:var(--amber-dark);">₹999</span><span class="pricing-period"> / month</span></div>
+        <div class="pricing-desc">For tour operators, hotels, and guide agencies scaling their business.</div>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check"></i> Everything in Premium</li>
+          <li><i class="fas fa-check"></i> Verified business listing</li>
+          <li><i class="fas fa-check"></i> Analytics dashboard</li>
+          <li><i class="fas fa-check"></i> Multi-language support</li>
+          <li><i class="fas fa-check"></i> API access</li>
+          <li><i class="fas fa-check"></i> Dedicated account manager</li>
+        </ul>
+        <button class="btn-plan bp-biz" onclick="openBookingModal('Business Plan')">Get Business Plan</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="nav-logo-icon">🌍</div>
+          <span class="nav-logo-text">Travel<span>Sphere</span></span>
+        </div>
+        <p class="footer-brand-desc">India's trusted tourism platform helping travellers explore smarter, safer, and more locally than ever before.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="footer-social"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="footer-social"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Product</div>
+        <ul class="footer-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#map-section">Explore Map</a></li>
+          <li><a href="#guides">Find Guides</a></li>
+          <li><a href="#experiences">Experiences</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Refund Policy</a></li>
+          <li><a href="#">Data Security</a></li>
+          <li><a href="#">Guide Agreement</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2024 <span>TravelSphere</span>. All rights reserved. Made with ❤️ in India.</div>
+      <div class="footer-copy">Empowering Indian Tourism · Safe &amp; Secure</div>
+    </div>
+  </div>
+</footer>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('bookingModal')"><i class="fas fa-times"></i></button>
+    <div class="modal-title">Book Your Experience</div>
+    <div class="modal-sub" id="bookingModalSub">Fill in your details to complete the booking.</div>
+    <form id="bookingForm" onsubmit="submitBooking(event)">
+      <div class="form-group"><label class="form-label">Full Name *</label><input type="text" class="form-input" id="bookingName" placeholder="Enter your name" required /></div>
+      <div class="form-group"><label class="form-label">Email Address *</label><input type="email" class="form-input" id="bookingEmail" placeholder="your@email.com" required /></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Phone Number *</label><input type="tel" class="form-input" id="bookingPhone" placeholder="+91 98765 43210" required /></div>
+        <div class="form-group"><label class="form-label">No. of People</label><input type="number" class="form-input" id="bookingPeople" placeholder="2" min="1" value="1" /></div>
+      </div>
+      <div class="form-group"><label class="form-label">Preferred Date</label><input type="date" class="form-input" id="bookingDate" /></div>
+      <div class="form-group"><label class="form-label">Special Requests (Optional)</label><input type="text" class="form-input" id="bookingRequests" placeholder="Accessibility needs, dietary restrictions, etc." /></div>
+      <button type="submit" class="btn-submit" id="bookingSubmitBtn">Confirm Booking</button>
+    </form>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
